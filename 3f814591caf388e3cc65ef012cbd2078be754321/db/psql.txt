@@ -1,0 +1,9 @@
+Host		ec2-54-175-243-75.compute-1.amazonaws.com
+Database	d1bqqexxxbjmm
+User		ezlnslhxxaca
+Port		5432
+Password	0b4b019f4183a60xxx9d1a45fc6903ce58a3097404e56bbe3ebef5
+URI		postgres://ezlnsxxxxxxlgaca:0b4b019f4183xxxxxxa45fc6903ce58a3097404e56bbe3ebef5@ec2-54-175-243-75.compute-1.amazonaws.com:5432/d1bqqehcpfbjmm
+Heroku CLI	heroku pg:psql postgresql-clear-33700 --app radiant-castle-37136
+
+heroku pg:psql

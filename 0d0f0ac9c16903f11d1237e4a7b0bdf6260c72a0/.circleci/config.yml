@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12
+    # To support coverage reports from forks
+    environment:
+      CODECLIMATE_REPO_TOKEN: 799d3234f9bb133fe6efa4dfe74f7a7510f2d9c1dca419875de8257a5f02db35
+      FORCE_COLOR: true
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+
+      # --frozen-lockfile ensures yarn.lockfile isn't accidentally outdated compared to package.json
+      - run: yarn install --no-progress --frozen-lockfile
+
+      - run: yarn coverage --runInBand
+
+      - run: yarn codeclimate
+
+      # Make sure we don't get any surprises later when we try to publish a release
+      - run: yarn prepublishOnly
+
+      # Wait with saving deps cache until all tests pass
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+
+      # Semantic release is setup to check on its own when to publish a new release or not
+      - run: npx semantic-release

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "787172259933",
+    "project_id": "axolotl-24ff5",
+    "storage_bucket": "axolotl-24ff5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78717233330:android:cbf461a7fb44ccdde863a9",
+        "android_client_info": {
+          "package_name": "com.example.axolotl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7871723339980-u0l69xxxxonls439xxxs2pbgbie4tbqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNItoXebsm4p_VSW7mTVrFKPgoBYgB10c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787172253380-u0l69xxxxonls439qggs2pbgbie4tbqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

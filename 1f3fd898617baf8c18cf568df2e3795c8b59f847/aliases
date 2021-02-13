@@ -1,0 +1,255 @@
+#Basic aliases
+alias q="exit"
+alias rtorrent="~/rtorrent/start"
+alias :q="exit"
+alias c="clear"
+alias cn="cd && clear && neofetch && tmux list-sessions"
+alias ls='ls --color=auto'
+alias f="ls -lah | grep -i "
+alias sizes="du -shc * | sort -h"
+alias clip="xclip -selection clipboard"
+alias kkill="kill -KILL"
+
+#Editing aliases
+alias v="nvim"
+alias e="sudo -e"
+alias edv="EDITOR=nvim"
+
+
+#Program aliases
+alias mpvss="mpv --deband=no --screenshot-format=png"
+alias fplank="sudo make planck/rev5:clonex10100:dfu"
+alias stmrun="~/Desktop/steam-runtime/run.sh"
+alias interfaces="~/gamesFucking/goldlinux/tools/find_interfaces.sh ./libsteam_api.so > steam_interfaces.txt"
+alias vnc="x11vnc -display :0 -usepw"
+alias icat="kitty +kitten icat"
+alias spectral="sox -n spectrogram"
+alias giga="mv ~/steamapps/devildaggers/dd/survival ~/steamapps/devildaggers/dd/tmp && mv ~/steamapps/devildaggers/dd/giga ~/steamapps/devildaggers/dd/survival && mv ~/steamapps/devildaggers/dd/tmp ~/steamapps/devildaggers/dd/giga"
+alias levi="mv ~/steamapps/devildaggers/dd/survival ~/steamapps/devildaggers/dd/tmp && mv ~/steamapps/devildaggers/dd/levi ~/steamapps/devildaggers/dd/survival && mv ~/steamapps/devildaggers/dd/tmp ~/steamapps/devildaggers/dd/levi"
+alias np="npm install && npm start"
+alias polylaunch="~/.config/polybar/launch.sh"
+alias autobuild="./autogen.sh && ./configure.sh && make && make check"
+
+#Pyroscope
+alias rtimportd="rtcontrol --from-view complete 'realpath=*/anime/*,*/TV/*' 'tagged=!imported' --tag '+imported' -q -o 'cp -rl \"\$(path)s\" /data2/jellyfin/imports/ && chmod 777 -R \"/data2/jellyfin/imports/\$(path.pathbase)s\"'" # && sonarrImport \"\$(path.pathbase)s\"'"
+alias rtimport="rtcontrol --from-view complete 'tagged=import' --tag '-import' -q -o 'cp -rl \"\$(path)s\" /data2/jellyfin/imports/ && chmod 777 -R \"/data2/jellyfin/imports/\$(path.pathbase)s\"'"
+#alias rtimportd="rtcontrol --from-view complete 'realpath=*/anime/*,*/TV/*' 'tagged=!imported' -q -o 'cp -rl \"\$(path)s\" /data2/jellyfin/imports/ && chmod 777 -R \"/data2/jellyfin/imports/\$(path.pathbase)s\" '"
+#alias rtimport="rtimportd --tag '+imported' | bash"
+alias rttagc="rtcontrol --from-view tagged 'name=*' --tag '-imported'"
+alias linuxGamesList="rtcontrol --from-view complete 'alias=ggn' 'metafile=*Linux*' -qo '\$(metafile.pathbase)s'"
+
+#Pacman
+alias pac="sudo pacman -Syu"
+alias pacr="sudo pacman -Rs"
+alias paci="sudo pacman -Qi"
+
+# Docker
+alias dcu="sudo docker-compose up -d"
+alias dcd"sudo docker-compose down"
+alias dcup"sudo docker-compose down && sudo docker-compose pull && sudo docker-compose up -d"
+
+#Alias for searching in pacman and opening the file in vim
+pacs (){
+    pacman -Ss $1 > /tmp/pacs
+    nvim /tmp/pacs
+}
+
+#Guix
+alias gix="guix install -c 10"
+alias gixp="guix pull -c 10"
+alias gixr="guix install"
+alias gixi="guix package -I"
+guixgem() {
+    guix import gem -r $1 >> $HOME/guix-packages/ruby-local-gems.scm
+    package_name="ruby-$1"
+    guix build $package_name
+    if [[ $? -eq 0 ]]; then
+        sed -i "s/;; AUTOINSERT/\"$package_name\"\n    ;; AUTOINSERT/" ~/langs/ruby.scm
+        ~/langs/load.sh
+    else
+        echo "Error building gem"
+    fi
+}
+guixgithash() {
+    cd /tmp
+    dir=$(basename $1 .git)
+    if [[ -e "$dir" ]]; then
+        echo "deleting"
+        rm -rf "$dir"
+    fi
+    git clone "$1"
+    cd $dir
+    guix hash -rx .
+}
+
+viewlog() {
+    bzip2 -dc $1 | less
+}
+mani() {
+    guix package -m "/home/clone/dotfiles/guix-manifests/$1.scm" -p "/home/clone/.guix-extra-profiles/$1/$1"
+}
+
+#Search a project folder for keyword
+s (){
+    grep -Hrn --exclude-dir='.*' "$1" *
+}
+
+#Vpn aliases
+alias vf="sudo protonvpn-cli -f"
+alias vp="sudo protonvpn-cli -p2p"
+alias vd="sudo protonvpn-cli -d"
+
+#Systemctl aliases
+alias ena="sudo systemctl enable"
+alias dis="sudo systemctl disable"
+alias sta="systemctl status"
+
+#Commonly edited config files alias be="v ~/.bashrc" alias ve="v ~/.vimrc"
+#Random
+alias scr="scrot ~/Pictures/screenshots/Y%-m%-d%-scrot.png"
+alias exa="sudo chmod +x"
+
+#Quick connections
+alias m="mutt -f imaps://xxxx@nevans.me@mail.nevans.me"
+alias mssh="sudo ssh -i /home/clone/.oldSSH/amazon/id_rsa admin@100.35.250.118"
+alias rssh="ssh ubuntu@192.168.1.12"
+alias dssh="ssh debian@192.168.1.6"
+
+#Project aliases
+alias pmp="python3 ~/projects/mpdClient/src/mp.py"
+
+#MPC macros
+alias mpdRestart="mpc prev && mpc pause"
+#plays an album
+al(){
+    mpc clear > /dev/null
+    mpc search album $1 | mpc add
+    mpc play
+}
+#plays a playlist
+pl(){
+    mpc clear > /dev/null
+    cat ~/playlists/$1 | mpc add
+    mpc play
+}
+#adds songs to playlist
+addToPlaylist(){
+    if [ ! -f ~/playlists/$1 ]; then
+        touch ~/playlists/$1
+    fi
+    mpc search title "$2" >> ~/playlists/$1
+}
+
+#view man page in vim
+ma(){
+    man $1 > /tmp/man
+    vim /tmp/man
+}
+
+#upload file to oxo
+oxo(){
+    curl -F"file=@$1" http://0x0.st
+}
+
+#screenshot and upload
+upScr(){
+    scrot -o /tmp/scrot
+    oxo /tmp/scrot
+}
+
+crk(){
+    mv libsteam_api.so libsteam_api.old
+    cp /home/clone/gamesFucking/goldlinux/x86_64/libsteam_api.so ./
+}
+
+crk86(){
+    mv libsteam_api.so libsteam_api.old
+    cp /home/clone/gamesFucking/goldlinux/x86/libsteam_api.so ./
+}
+
+# wallpaper(){
+    # rm ~/Pictures/wallpapers/wallpaper
+    # P="/home/clone/Pictures/wallpapers/$(basename $1)"
+    # if [[ ! -f $P ]]; then
+        # echo $P
+        # cp $1 ~/Pictures/wallpapers/
+    # fi
+ 
+    # ln -s $P ~/Pictures/wallpapers/wallpaper
+    # feh --bg-scale ~/Pictures/wallpapers/wallpaper
+# }
+
+mp(){
+    mpv $1 &> /dev/null &
+}
+
+aur(){
+    cd ~/aurBuilds
+    git=$(xclip -selection c -o)
+    dir=$(basename $git .git)
+    echo $dir
+    if [[ -d "${dir}" ]]; then
+        rm -rf "${dir}"
+    fi
+    git clone $git
+    cd "${dir}"
+    nvim PKGBUILD
+    makepkg -si
+}
+
+mp3Add(){
+    ls | grep $1 >> /data/phonemp3list
+}
+
+mp3Addc() {
+    echo $(basename $PWD) >> /data/phonemp3list
+}
+
+
+alias osusong="mv ~/Downloads/*.osz ~/.local/share/wineprefixes/osu/drive_c/users/clone/Local\ Settings/Application\ Data/osu\!/Songs/"
+alias col="setxkbmap us colemak"
+
+alias eth="ethminer -P stratum1+ssl://1xD208D3BB8985855F577314bAfAAcCd987c264bFc.clonerig@us1.ethermine.org:5555"
+setFanSpeed() {
+    echo $1
+    echo "\n"
+    #a=(($1 * 255))
+    #echo $(printf "%.0f" a)
+}
+#alias ethWithFan() {
+    #sudo -i
+    #echo "1" > /sys/class/drm/card0/device/hwmon/hwmon2/pwm1_enable
+    #echo "160" > /sys/class/drm/card0/device/hwmon/hwmon2/pwm1
+    #exit
+    #eth && sudo -i &&
+#}
+
+mkscript() {
+    script="/home/clone/bin/$1"
+    if [[ ! -f "$script" ]]; then
+        touch $script
+        echo "#!/bin/sh" > $script
+        $EDITOR $script
+        chmod a+x $script
+    fi
+}
+
+#Advent of code downloader
+aocd() {
+    curl --cookie "session=$AOC_SESSION" "https://adventofcode.com/2020/day/$1/input" > input
+    wc input
+}
+
+#Recover file given unique string
+recover() {
+    sudo grep -i -a -B100 -A100 "$1" /dev/sda1 | strings > /tmp/my-recovered-file
+}
+
+togif() {
+    ffmpeg \
+    -i $1 \
+    -vf "fps=10,scale=512:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+    -loop 0 \
+    "${1%.*}.gif"
+}
+alias flank="sudo bin/qmk compile -kb planck/rev5 -km clonex10100:dfu"

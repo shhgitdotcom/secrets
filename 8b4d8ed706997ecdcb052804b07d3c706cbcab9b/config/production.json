@@ -1,0 +1,6 @@
+{
+"port":5000,
+ "jwtSecret":"mxxxxx",
+"mongoUri": "mongodb+srv://serxxxxx03:sxxxx778@cluster0.1lssu.mongodb.net/cluster0?retryWrites=true&w=majority",
+"baseUrl": "https://evxxab.herokuapp.com"
+}

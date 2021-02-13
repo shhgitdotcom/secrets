@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "795702888000",
+    "project_id": "mascotapp-8ba76",
+    "storage_bucket": "mascotapp-8ba76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795702888000:android:7f1215b761beece755661c",
+        "android_client_info": {
+          "package_name": "com.mascotapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795702888000-v3t4tvuhl5bck2q44c48e3qu7lkgf33j.apps.googleusercontent.com",
+          "client_type": 3,
+          "android_info": {
+            "package_name": "com.mascotapp",
+            "certificate_hash": "5e8f16062ea3cd3c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "473036889467-niatcbo4v3bucf662gsfg2qle2dfhca5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLkddmzEN-XrSWFuv1JxBgT4Ff0c-F0Xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795702888000-43t4tvuhl4bck2q11c38e3qu7lkgc33j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

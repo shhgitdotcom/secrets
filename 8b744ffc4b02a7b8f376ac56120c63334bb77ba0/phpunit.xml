@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" backupGlobals="false"
+         backupStaticAttributes="false" beStrictAboutTestsThatDoNotTestAnything="false" colors="true" verbose="true"
+         convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true"
+         failOnRisky="true" failOnWarning="true" stopOnFailure="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage>
+        <include>
+            <directory>./src</directory>
+        </include>
+        <exclude>
+            <directory>./tests</directory>
+        </exclude>
+    </coverage>
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <env name="REDIS_CONNECTION_DSN" value="tcp://localhost:6379"/>
+        <env name="TRANSPORT_CONNECTION_DSN" value="amqp://guest:guest@127.0.0.1:5672/?heartbeat=0"/>
+        <env name="TEST_POSTGRES_DSN" value="pgsql://test:123456789@localhost:5432/test"/>
+    </php>
+    <testsuites>
+
+        <testsuite name="Component: common">
+            <directory>./vendor/php-service-bus/common/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: annotations (attributes) reader">
+            <directory>./vendor/php-service-bus/annotations-reader/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: cache">
+            <directory>./vendor/php-service-bus/cache/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: http client">
+            <directory>./vendor/php-service-bus/http-client/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: message serializer">
+            <directory>./vendor/php-service-bus/message-serializer/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: messages router">
+            <directory>./vendor/php-service-bus/messages-router/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: mutex">
+            <directory>./vendor/php-service-bus/mutex/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: storage">
+            <directory>./vendor/php-service-bus/storage/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: transport">
+            <directory>./vendor/php-service-bus/transport/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: telegram core">
+            <directory>./vendor/php-service-bus/telegram-bot-core/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: saga">
+            <directory>./vendor/php-service-bus/sagas/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: event sourcing">
+            <directory>./vendor/php-service-bus/event-sourcing/tests/</directory>
+        </testsuite>
+
+        <testsuite name="Component: scheduler">
+            <directory>./vendor/php-service-bus/scheduler/tests/</directory>
+        </testsuite>
+
+        <testsuite name="PHP Service Bus">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
